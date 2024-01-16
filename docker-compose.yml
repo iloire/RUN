@@ -1,0 +1,8 @@
+services:
+  base:
+    image: ${BASE_IMAGE}:fedora${FEDORA_VERSION}
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        FEDORA_VERSION: ${FEDORA_VERSION}
