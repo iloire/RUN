@@ -12,7 +12,7 @@ WORKDIR $BASEDIR
 RUN mkdir -p $BASEDIR $LIBRARIES_DIR $FOLDER_LOGS
 
 RUN dnf update -y && dnf install -y \
-  which wget time findutils less vim patch diffutils \
+  which wget mc time findutils less vim patch diffutils \
   git gcc gcc-fortran g++ csh gfortran cpp m4 \
   openmpi openmpi-devel \
   python3 file \
@@ -31,7 +31,9 @@ COPY install/* $BASEDIR
 RUN chmod +x $BASEDIR/*.sh
 
 RUN ./install_libraries.sh
-RUN ./install_WRF.sh
-RUN ./install_WPS.sh
+
+# needs manual prompt for architecture
+# RUN ./install_WRF.sh
+# RUN ./install_WPS.sh
 
 # RUN /bin/bash
