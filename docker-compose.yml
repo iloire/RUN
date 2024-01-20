@@ -7,10 +7,10 @@ services:
       args:
         FEDORA_VERSION: ${FEDORA_VERSION}
     volumes:
-      - ../geog:/root/rasp/geog
+      - ../geog_high_res_mandatory/WPS_GEOG:/root/rasp/geog
 
-  rasp:
-    image: ${BASE_IMAGE}:fedora${FEDORA_VERSION}-RASP
+  run:
+    image: ${BASE_IMAGE}:fedora${FEDORA_VERSION}-$REGION
     build:
       context: ./
       dockerfile: Dockerfile
@@ -18,3 +18,5 @@ services:
         FEDORA_VERSION: ${FEDORA_VERSION}
         BASE_IMAGE: ${BASE_IMAGE}
         REGION: ${REGION}
+    volumes:
+      - ../geog_high_res_mandatory/WPS_GEOG:/root/rasp/geog

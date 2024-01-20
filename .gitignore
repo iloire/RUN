@@ -4,8 +4,8 @@
 **.tif
 **.nc
 **drjack*
-namelist.wps
-namelist.input
+# namelist.wps
+# namelist.input
 **__pycache__
 config.ini
 **/met_em.d0*
