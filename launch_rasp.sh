@@ -25,24 +25,25 @@ rm $HOME/errors.txt
 touch $HOME/errors.txt
 
 mkdir -p ${FOL}
+
 (
-cd ${FOL}
-mkdir -p RUN WRF/run WPS dataGFS
-#runtime
-ln -s $HOME/METEO/RUN/* /tmp/METEO_$ID/RUN/
-ln -s $HOME/METEO/WPS/* /tmp/METEO_$ID/WPS/
-ln -s $HOME/METEO/WRF/run/* /tmp/METEO_$ID/WRF/run/
-ln -s $HOME/METEO/WRF/* /tmp/METEO_$ID/WRF/
+  cd ${FOL}
+  mkdir -p RUN WRF/run WPS dataGFS
+  #runtime
+  ln -s $HOME/METEO/RUN/* /tmp/METEO_$ID/RUN/
+  ln -s $HOME/METEO/WPS/* /tmp/METEO_$ID/WPS/
+  ln -s $HOME/METEO/WRF/run/* /tmp/METEO_$ID/WRF/run/
+  ln -s $HOME/METEO/WRF/* /tmp/METEO_$ID/WRF/
 )
 
 (
-cd ${FOL}/RUN/
-echo > run_rasp.err
-echo > run_rasp.log
+  cd ${FOL}/RUN/
+  echo > run_rasp.err
+  echo > run_rasp.log
 
-./generate_config.py ${FOL} $1 $2 $3
+  ./generate_config.py ${FOL} $1 $2 $3
 
-time ./run_rasp.sh ${FOL} $2 $3
+  time ./run_rasp.sh ${FOL} $2 $3
 )
 
 rm -r ${FOL}   # delete folder (XXX no debugging!!!)

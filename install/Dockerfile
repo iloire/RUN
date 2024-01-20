@@ -17,7 +17,7 @@ RUN dnf update -y && dnf install -y \
   openmpi openmpi-devel \
   python3 file \
   python3-rasterio python3-cartopy python3-netcdf4 python3-xarray \
-  mpich zlib libpng jasper \
+  mpich zlib jasper \
   netcdf netcdf-fortran netcdf-fortran-devel \
   && dnf clean all
 

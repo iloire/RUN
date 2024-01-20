@@ -1,0 +1,41 @@
+&share
+ wrf_core             = 'ARW'
+ max_dom              = 1
+ start_date           = '2024-00-06_03:00:00'
+ end_date             = '2024-00-06_18:00:00'
+ interval_seconds     = 10800
+ io_form_geogrid      = 2
+ debug_level          = 0
+/
+
+&geogrid
+ parent_id            = 1
+ parent_grid_ratio    = 1
+ i_parent_start       = 1
+ j_parent_start       = 1
+ e_we                 = 18
+ e_sn                 = 16
+ geog_data_res        = 'default'
+ dx                   = 12000
+ dy                   = 12000
+ map_proj             = 'lambert'
+ ref_lat              = 28.745
+ ref_lon              = -13.700
+ truelat1             = 28.745
+ truelat2             = 28.745
+ stand_lon            = -13.700
+ geog_data_path       = '/root/rasp/geog'
+ opt_geogrid_tbl_path = './',
+/
+
+&ungrib
+ out_format           = 'WPS'
+ prefix               = 'UNGRIB'
+/
+
+&metgrid
+ fg_name              = 'UNGRIB'
+ io_form_metgrid      = 2
+ opt_output_from_metgrid_path = './',
+ opt_metgrid_tbl_path = './',
+/

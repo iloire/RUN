@@ -21,16 +21,3 @@ export LD_LIBRARY_PATH=$DIR/grib2/lib:$LD_LIBRARY_PATH
 
 export OMP_NUM_THREADS=2
 
-# echo "expected PATH:"
-# echo "/home/aeolus/RASP/Build_WRF/LIBRARIES/mpich/bin:/home/aeolus/RASP/Build_WRF/LIBRARIES/netcdf/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
-# echo
-# echo "current PATH:"
-# echo $PATH
-
-function echo_success() {
-   echo SUCCESS: $1
-}
-
-function echo_fail() {
-   echo ERROR: $1
-}

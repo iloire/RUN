@@ -14,3 +14,5 @@ export PATH=$LIBRARIES_DIR/netcdf/bin:$PATH
 export NETCDF=$LIBRARIES_DIR/netcdf
 
 export PATH=$LIBRARIES_DIR/mpich/bin:$PATH
+
+export LD_LIBRARY_PATH=$LIBRARIES_DIR/grib2/lib/

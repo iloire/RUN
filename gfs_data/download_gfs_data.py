@@ -12,7 +12,6 @@ import gfs
 import logging
 LG = logging.getLogger('main')
 
-
 def main(fini = 'config.ini'):
    R = common.load(fini)
 
