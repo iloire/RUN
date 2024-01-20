@@ -5,9 +5,6 @@
 echo "===== Building WPS ====="
 cd $BASEDIR/WPS
 ./clean
-echo "when asked select option 1.  Linux x86_64, gfortran (serial)"
-echo "it is recommended to use serial regardless of the selection in WRF"
-./configure
 echo "===== compiling WPS..."
 ./compile > $FOLDER_LOGS/wps_compile.log
 
