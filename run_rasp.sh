@@ -11,7 +11,7 @@
 # OUTdata=`./get_domain.py | head -n 3 | tail -n 1`
 # Ncores=`./get_domain.py | head -n 4 | tail -n 1`
 
-. env.sh
+. ../env.sh
 
 echo -e "Starting RUN"
 echo -e "Domain         : ${DOMAIN}"
