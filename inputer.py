@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-# -*- coding: UTF-8 -*-
 
 import os
 # here = os.path.dirname(os.path.realpath(__file__))
 is_cron = False
 fmt = '%d/%m/%Y-%H:%M'
+
 ################################# LOGGING ####################################
 import logging
 import log_help
@@ -19,13 +19,13 @@ LG = logging.getLogger('main')
 if not is_cron: log_help.screen_handler(LG, lv=lv)
 LG.info(f'Starting: {__file__}')
 ##############################################################################
+
 import common
 import datetime as dt
 
 fini = 'config.ini'
 
 R = common.load(fini)
-
 
 ################
 # namelist.wps #
@@ -56,6 +56,7 @@ with open(f'namelist.wps','w') as f:
 ##################  XXX nooooo no no no no no no no
 # namelist.input #  XXX for fuck's sake!!! no!!!!
 ##################  XXX rewrite this
+
 duration = R.end_date - R.start_date
 duration = duration.total_seconds()
 # time_control
@@ -80,6 +81,7 @@ end_minute = R.end_date.minute
 end_second = R.end_date.second
 
 fname = f'{R.domain_folder}/namelist.input'
+
 with open(fname,'r') as f:
    all_text = []
    for line in f.read().strip().splitlines():

@@ -8,6 +8,8 @@ FROM $BASE_IMAGE:fedora$FEDORA_VERSION
 ENV BASEDIR=/root/rasp
 
 ARG REGION
+ENV REGION=$REGION
+
 RUN test -n "$REGION" || (echo "REGION  not set" && false)
 
 COPY ./Domains/$REGION $BASEDIR/$REGION
@@ -20,6 +22,8 @@ COPY run_rasp.sh $BASEDIR/$REGION
 COPY config.ini $BASEDIR/$REGION
 
 COPY run/*.sh $BASEDIR/$REGION
+
+COPY inputer.py $BASEDIR/$REGION
 
 WORKDIR $BASEDIR/$REGION
 
