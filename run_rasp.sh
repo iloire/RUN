@@ -9,6 +9,7 @@ echo $BASEDIR
 
 (
   rm -f ../WRF/namelist.wps ../WRF/namelist.input ../WRF/run/namelist.input
+  echo -e "\n===================="
   echo "Setting up the inputs"
   python3 inputer.py
   ln -s "$BASEDIR/$REGION/namelist.wps" "../WRF/"
@@ -79,9 +80,9 @@ else
    exit 1
 fi
 
-
 (
   #### WRF
+  echo -e "\n===================="
   echo "Going for WRF"
   cd ../WRF/run
   ln -sf ../../Lanzarote/met_em* .
@@ -95,6 +96,7 @@ fi
   else
      1>&2 echo "Error running real.exe"
      tail rsl.error.0000
+     exit 1
   fi
 
   echo -e "\nStarting wrf.exe"
@@ -108,6 +110,7 @@ fi
      echo "WRF worked!!"
   else
      1>&2 echo "Error running wrf.exe"
+     exit 1
   fi
   # mkdir -p "${OUTdata}"
   # rm wrfoutReady*

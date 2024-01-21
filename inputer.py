@@ -16,7 +16,6 @@ logging.basicConfig(level=lv,
                  datefmt='%Y/%m/%d-%H:%M',
                  filename = log_file, filemode='w')
 LG = logging.getLogger('main')
-if not is_cron: log_help.screen_handler(LG, lv=lv)
 LG.info(f'Starting: {__file__}')
 ##############################################################################
 
