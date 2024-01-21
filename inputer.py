@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
 import os
-# here = os.path.dirname(os.path.realpath(__file__))
-is_cron = False
 fmt = '%d/%m/%Y-%H:%M'
 
 ################################# LOGGING ####################################
@@ -16,6 +14,7 @@ logging.basicConfig(level=lv,
                  datefmt='%Y/%m/%d-%H:%M',
                  filename = log_file, filemode='w')
 LG = logging.getLogger('main')
+log_help.screen_handler(LG, lv=lv)
 LG.info(f'Starting: {__file__}')
 ##############################################################################
 
@@ -48,9 +47,12 @@ with open(fname,'r') as f:
          line = ' ' + line.strip()
       all_text.append(line)
 
-with open(f'namelist.wps','w') as f:
-   f.write('\n'.join(all_text)+'\n\n')
+file_content = '\n'.join(all_text)+'\n\n'
 
+with open(f'namelist.wps','w') as f:
+   f.write(file_content)
+
+LG.info(f'namelist.wps: {file_content}')
 
 ##################  XXX nooooo no no no no no no no
 # namelist.input #  XXX for fuck's sake!!! no!!!!
@@ -160,5 +162,9 @@ with open(fname,'r') as f:
       all_text.append(line)
 
 
+file_content = '\n'.join(all_text)+'\n\n'
+
 with open(f'namelist.input','w') as f:
-   f.write('\n'.join(all_text)+'\n\n')
+   f.write(file_content)
+
+LG.info(f'namelist.input: {file_content}')
