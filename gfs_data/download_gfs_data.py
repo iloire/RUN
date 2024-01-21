@@ -1,27 +1,28 @@
 #!/usr/bin/python3
-# -*- coding: UTF-8 -*-
 
 import os
-# here = os.path.dirname(os.path.realpath(__file__))
-is_cron = False
-is_cron = bool( os.getenv('RUN_BY_CRON') )
-fmt = '%d/%m/%Y-%H:%M'
 import common
 import datetime as dt
 import gfs
 import logging
+
 LG = logging.getLogger('main')
+
+fmt = '%d/%m/%Y-%H:%M'
 
 def main(fini = 'config.ini'):
    R = common.load(fini)
 
+   LG.info(f'{R}')
    LG.info(f'{R.start_date} - {R.end_date}')
    current_date = R.start_date
    step = dt.timedelta(hours=R.GFS_timedelta)  #XXX should be in config.ini
    max_tries = 5
    dates_calc = []
+
    while current_date <= R.end_date:
       # if R.daily_hours[0] <= current_date.time() <= R.daily_hours[1]:
+      # LG.info(f'curent_date:{current_date}')
       dates_calc.append((current_date))
       current_date += step
 
@@ -45,7 +46,7 @@ if __name__ == '__main__':
                     datefmt='%Y/%m/%d-%H:%M',
                     filename = log_file, filemode='w')
    LG = logging.getLogger('main')
-   if not is_cron: log_help.screen_handler(LG, lv=lv)
+   log_help.screen_handler(LG, lv=lv)
    LG.info(f'Starting: {__file__}')
 ##############################################################################
    main()

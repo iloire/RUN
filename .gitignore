@@ -7,5 +7,5 @@
 # namelist.wps
 # namelist.input
 **__pycache__
-config.ini
+# config.ini
 **/met_em.d0*

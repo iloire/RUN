@@ -7,7 +7,6 @@ FROM $BASE_IMAGE:fedora$FEDORA_VERSION
 
 ENV BASEDIR=/root/rasp
 
-
 ARG REGION
 RUN test -n "$REGION" || (echo "REGION  not set" && false)
 
@@ -20,8 +19,8 @@ COPY gfs_data/*.py $BASEDIR/$REGION
 COPY run_rasp.sh $BASEDIR/$REGION
 COPY config.ini $BASEDIR/$REGION
 
-WORKDIR $BASEDIR/$REGION
+COPY run/*.sh $BASEDIR/$REGION
 
-RUN ./geogrid.exe
+WORKDIR $BASEDIR/$REGION
 
 RUN /bin/bash

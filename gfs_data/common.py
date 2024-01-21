@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-# -*- coding: UTF-8 -*-
 
 from configparser import ConfigParser, ExtendedInterpolation
 from os.path import expanduser
 from os import listdir
 from os.path import isfile, join
+
 import datetime as dt
 import os
 here = os.path.dirname(os.path.realpath(__file__))

@@ -19,22 +19,11 @@ echo -e "GFS Data Folder: ${GFSdata} "
 echo -e "Ncores: ${Ncores}\n"
 echo -e "OMP: ${OMP_NUM_THREADS}\n"
 
-# (
-# echo "Cleaning up previous runs"
-# cd $1
-# pwd
-# #### Clean previous runs
-# rm dataGFS/*
-# rm RUN/namelist.wps RUN/namelist.input
-# # rm "${DOMAIN}"/met_em* "${DOMAIN}"/geo_em.*
-# rm WPS/namelist.wps WPS/namelist.input
-# rm WPS/FILE* WPS/GRIBFILE.AA* WPS/*.log WPS/log.*
-# rm WRF/run/namelist.input
-# rm WRF/run/rsl.* WRF/run/wrfout* WRF/run/met_em*
-# echo "cleaned"
-# )
+
+./run_clean.sh
 
 (
+  echo -e "\n===================="
   echo "Downloading GFS data"
   time python3 download_gfs_data.py
   if [ $? -eq 0 ]; then
@@ -46,6 +35,7 @@ echo -e "OMP: ${OMP_NUM_THREADS}\n"
 )
 
 (
+  echo -e "\n===================="
   echo "Running geogrid"
   time ./geogrid.exe >& log.geogrid
   grep "Successful completion of geogrid" log.geogrid
@@ -53,6 +43,7 @@ echo -e "OMP: ${OMP_NUM_THREADS}\n"
      echo "Geogrid was successful"
      echo "Geogrid geo_met* files:"
      ../WPS/link_grib.csh ../dataGFS/
+     ls geo_met*.*
   else
      echo "Error running Geogrid"
      exit 1
@@ -60,10 +51,12 @@ echo -e "OMP: ${OMP_NUM_THREADS}\n"
 )
 
 (
+  echo -e "\n===================="
   echo "Running ungrib"
   ln -sf ../WPS/ungrib/Variable_Tables/Vtable.GFS Vtable
   time ./ungrib.exe
-  echo "Ungrib 'FILES*' files:"
+  # echo "Ungrib 'FILES*' files:"
+  cat ungrib.log
 )
 
 #
