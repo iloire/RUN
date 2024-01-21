@@ -22,8 +22,10 @@ COPY run_rasp.sh $BASEDIR/$REGION
 COPY config.ini $BASEDIR/$REGION
 
 COPY run/*.sh $BASEDIR/$REGION
+RUN chmod +x $BASEDIR/*.sh
 
 COPY inputer.py $BASEDIR/$REGION
+RUN chmod +x $BASEDIR/$REGION/*.py
 
 WORKDIR $BASEDIR/$REGION
 
