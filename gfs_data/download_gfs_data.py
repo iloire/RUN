@@ -21,15 +21,15 @@ def main(fini = 'config.ini'):
    dates_calc = []
 
    while current_date <= R.end_date:
-      # if R.daily_hours[0] <= current_date.time() <= R.daily_hours[1]:
-      # LG.info(f'curent_date:{current_date}')
       dates_calc.append((current_date))
       current_date += step
 
    cont = 0
    while cont < max_tries:
       try:
-         got_all_files = gfs.get_files(R, dates_calc, R.GFS_data_folder,
+         got_all_files = gfs.get_files(R,
+                                       dates_calc,
+                                       R.GFS_data_folder,
                                        wait4batch=R.wait4batch)
          if got_all_files: cont = 2*max_tries  # XXX dumb ways to exit...
       except:
