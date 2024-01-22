@@ -9,16 +9,26 @@ echo $BASEDIR
 
 (
   rm -f ../WRF/namelist.wps ../WRF/namelist.input ../WRF/run/namelist.input
+  rm -f ../WPS/namelist.wps ../WPS/namelist.input
   echo -e "\n===================="
   echo "Setting up the inputs"
   python3 inputer.py
+  ln -s "$BASEDIR/$REGION/namelist.wps" "../WPS/"
+  ln -s "$BASEDIR/$REGION/namelist.input" "../WPS/"
+
   ln -s "$BASEDIR/$REGION/namelist.wps" "../WRF/"
   ln -s "$BASEDIR/$REGION/namelist.input" "../WRF/"
   ln -s "$BASEDIR/$REGION/namelist.input" "../WRF/run/"
-  echo "WRF Input files:"
-  ls ../WRF/namelist.*
+  echo "WRF/WPS Input files:"
+  ls ../WPS/namelist.*
   ls ../WRF/run/namelist.*
 )
+if [ $? -eq 0 ]; then
+   echo "SUCCESS: inputs generated correctly."
+else
+   1>&2 echo "FAIL: Error during input generation"
+   exit 1
+fi
 
 (
   echo -e "\n===================="
