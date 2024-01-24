@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 
-import os
+import common
+import datetime as dt
+import logging
+import log_help
+
 fmt = '%d/%m/%Y-%H:%M'
 
 ################################# LOGGING ####################################
-import logging
-import log_help
 log_file = '.'.join( __file__.split('/')[-1].split('.')[:-1] ) + '.log'
-# log_file = here+'/'+'.'.join( __file__.split('/')[-1].split('.')[:-1] ) + '.log'
 lv = logging.DEBUG
 logging.basicConfig(level=lv,
                  format='%(asctime)s %(name)s:%(levelname)s - %(message)s',
@@ -18,9 +19,6 @@ log_help.screen_handler(LG, lv=lv)
 LG.info(f'Starting: {__file__}')
 ##############################################################################
 
-import common
-import datetime as dt
-
 fini = 'config.ini'
 
 R = common.load(fini)
@@ -29,11 +27,11 @@ R = common.load(fini)
 # namelist.wps #
 ################
 fname = f'{R.domain_folder}/namelist.wps'
+Ndomains = 1
 with open(fname,'r') as f:
    all_text = []
    for line in f.read().strip().splitlines():
       if line.strip().startswith('max_dom'):
-         # line = f' max_dom = {len(R.domains)},'  #XXX do not edit in namelists
          Ndomains = int(line.strip().split('=')[-1].strip().replace(',',''))
       elif line.strip().startswith('start_date'):
          line = f"start_date = "
@@ -60,6 +58,7 @@ LG.info(f'namelist.wps: {file_content}')
 
 duration = R.end_date - R.start_date
 duration = duration.total_seconds()
+
 # time_control
 run_days = int(duration/3600/24)
 duration -= run_days * 3600 * 24
@@ -68,12 +67,14 @@ duration -= run_hours * 3600
 run_minutes = int(duration/60)
 duration -= run_minutes * 60
 run_seconds = int(duration)
+
 start_year   = R.start_date.year
 start_month  = R.start_date.month
 start_day    = R.start_date.day
 start_hour   = R.start_date.hour
 start_minute = R.start_date.minute
 start_second = R.start_date.second
+
 end_year   = R.end_date.year
 end_month  = R.end_date.month
 end_day    = R.end_date.day
