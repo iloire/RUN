@@ -12,13 +12,21 @@ echo $BASEDIR
   rm -f ../WPS/namelist.wps ../WPS/namelist.input
   echo -e "\n===================="
   echo "Setting up the inputs"
-  python3 inputer.py
+ python3 inputer.py
+  if [ $? -eq 0 ]; then
+     echo "SUCCESS: inputer executed correctly."
+  else
+     1>&2 echo "FAIL: Error executing inputer"
+     exit 1
+  fi
   ln -s "$BASEDIR/$REGION/namelist.wps" "../WPS/"
   ln -s "$BASEDIR/$REGION/namelist.input" "../WPS/"
 
   ln -s "$BASEDIR/$REGION/namelist.wps" "../WRF/"
   ln -s "$BASEDIR/$REGION/namelist.input" "../WRF/"
+
   ln -s "$BASEDIR/$REGION/namelist.input" "../WRF/run/"
+
   echo "WRF/WPS Input files:"
   ls ../WPS/namelist.*
   ls ../WRF/run/namelist.*
@@ -49,14 +57,21 @@ fi
   grep "Successful completion of geogrid" log.geogrid
   if [ $? -eq 0 ]; then
      echo "Geogrid was successful"
-     echo "Geogrid geo_met* files:"
+     echo "Geogrid geo_em* files:"
      ../WPS/link_grib.csh ../dataGFS/
-     ls geo_met*.*
+     ls geo_em*.*
   else
      1>&2 echo "Error running Geogrid"
      exit 1
   fi
 )
+if [ $? -eq 0 ]; then
+   echo "SUCCESS: executing geogrid."
+else
+   1>&2 echo "FAIL: Error executing geogrid"
+   exit 1
+fi
+
 
 (
   echo -e "\n===================="
@@ -105,7 +120,7 @@ fi
      echo "REAL worked!!"
   else
      1>&2 echo "Error running real.exe"
-     tail rsl.error.0000
+     cat rsl.error.0000
      exit 1
   fi
 

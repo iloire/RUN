@@ -5,17 +5,18 @@ from os.path import expanduser
 from os import listdir
 from os.path import isfile, join
 
-import datetime as dt
 import os
-here = os.path.dirname(os.path.realpath(__file__))
+import datetime as dt
 import logging
 import log_help
+
 LG = logging.getLogger(__name__)
-import json
+log_help.screen_handler(LG, lv=logging.DEBUG)
+
 fmt = '%d/%m/%Y-%H:%M'
 
-
 class RunParams(object):
+
    def __init__(self, start_date, end_date, GFS_timedelta, domains,
                       domain_folder, GFS_data_folder,
                       output_folder, plots_folder,
@@ -57,6 +58,7 @@ class RunParams(object):
       self.bottomlat = bottomlat
       self.Ncores = Ncores
       self.wait4batch = wait4batch
+
    def __str__(self):
       msg = f'Forecast for: {self.start_date} - {self.end_date}\n'
       # msg += 'Hours mask: '
@@ -122,8 +124,10 @@ def load(fname='config.ini'):
    try:
       LG.debug('Trying to read start/end dates')
       start_date = config['run']['start_date']
+      LG.debug(f'config start_date: {start_date}')
       start_date = dt.datetime.strptime(start_date, '%d/%m/%Y-%H:%M')
       end_date = config['run']['end_date']
+      LG.debug(f'config end_date: {end_date}')
       end_date = dt.datetime.strptime(end_date, '%d/%m/%Y-%H:%M')
       LG.info(f'Run for: {start_date} - {end_date}')
    except KeyError:

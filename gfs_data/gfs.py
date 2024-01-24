@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import os
-here = os.path.dirname(os.path.realpath(__file__))
 import datetime as dt
 import numpy as np
 from ftplib import FTP
@@ -12,6 +11,8 @@ from time import sleep
 from random import random
 import log_help
 import logging
+
+here = os.path.dirname(os.path.realpath(__file__))
 LG = logging.getLogger(__name__)
 log_help.screen_handler(LG, lv=logging.DEBUG)
 
@@ -31,6 +32,7 @@ def get_GFS_calc(date, shift = 3+35/60, date_req=None):
    dateGFS: [datetime.datetime] GFS batch
    """
    if date_req == None: date_req = dt.datetime.utcnow()
+
    # GFS batch according to data
    GFS = list(range(0,24,6))
    hours = [h for h in GFS] + [date.hour+date.minute/60]
@@ -38,6 +40,7 @@ def get_GFS_calc(date, shift = 3+35/60, date_req=None):
    ind = (inds.index(4)-1) % len(GFS)
    dateGFS = date.replace(hour=GFS[ind],minute=0,second=0,microsecond=0)
    if dateGFS>date: dateGFS -= dt.timedelta(days=1)
+
    # GFS batch according to data availability
    GFS = list(range(0,24,6))
    hours = [h+shift for h in GFS] + [date_req.hour+date_req.minute/60]
@@ -93,6 +96,7 @@ def get_files(Params, dates, data_folder='data',wait4batch=40):
    base_url = 'https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?'
    ### Ensure all data from same GFS run XXX check!
    now = dt.datetime.utcnow()
+   LG.info(f" ------- Get files ----------")
    LG.info(f"earliest data: {min(dates).strftime('%Y/%m/%d/%H:00')}")
    batch = min([min(dates), now])
    LG.info(f"Getting tentative GFS batch for {batch.strftime('%Y%m%d/%H')}")
