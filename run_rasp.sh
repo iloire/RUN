@@ -12,7 +12,7 @@ echo $BASEDIR
   rm -f ../WPS/namelist.wps ../WPS/namelist.input
   echo -e "\n===================="
   echo "Setting up the inputs"
- python3 inputer.py
+  python3 inputer.py
   if [ $? -eq 0 ]; then
      echo "SUCCESS: inputer executed correctly."
   else
@@ -133,13 +133,11 @@ fi
   tail -n 1 rsl.error.0000 | grep -w SUCCESS
   if [ $? -eq 0 ]; then
      echo "WRF worked!!"
+     ls $BASEDIR/$REGION/out
   else
      1>&2 echo "Error running wrf.exe"
      exit 1
   fi
-  # mkdir -p "${OUTdata}"
-  # rm wrfoutReady*
-  # mv wrfout_* "${OUTdata}"
 )
 
 # Check WRF
