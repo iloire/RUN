@@ -114,6 +114,7 @@ def load(fname='config.ini'):
    """
    Load the config options and return it as a class
    """
+   LG.info(f' ------ read config file ------------------')
    LG.info(f'Loading config file: {fname}')
    if not os.path.isfile(fname): return None
    config = ConfigParser(inline_comment_prefixes='#')

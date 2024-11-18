@@ -16,3 +16,4 @@ export NETCDF=$LIBRARIES_DIR/netcdf
 export PATH=$LIBRARIES_DIR/mpich/bin:$PATH
 
 export LD_LIBRARY_PATH=$LIBRARIES_DIR/grib2/lib/
+export LD_LIBRARY_PATH=$LIBRARIES_DIR/libpng-1.2.50/.libs/

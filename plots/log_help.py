@@ -3,14 +3,6 @@
 
 import logging
 LG = logging.getLogger(__name__)   # Logger for this module
-#LlG = logging.getLogger('perform')
-#fh = logging.FileHandler('/tmp/performance.log',mode='w')
-#fmt = logging.Formatter('%(asctime)s %(name)s:%(levelname)s - %(message)s')
-#fh.setFormatter(fmt)
-#fh.setLevel(logging.DEBUG)
-#LlG.addHandler(fh)
-
-
 
 def screen_handler(lg=None,lv='debug',fmt='%(name)s -%(levelname)s- %(message)s'):
    """

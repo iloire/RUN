@@ -7,7 +7,8 @@ services:
       args:
         FEDORA_VERSION: ${FEDORA_VERSION}
     volumes:
-      - ../geog_high_res_mandatory/WPS_GEOG:/root/rasp/geog
+      # - ../geog_high_res_mandatory:/root/rasp/geog
+      - ../geog_low_res_mandatory/WPS_GEOG_LOW_RES:/root/rasp/geog
 
   run:
     image: ${BASE_IMAGE}:fedora${FEDORA_VERSION}-$REGION
@@ -19,4 +20,5 @@ services:
         BASE_IMAGE: ${BASE_IMAGE}
         REGION: ${REGION}
     volumes:
-      - ../geog_high_res_mandatory/WPS_GEOG:/root/rasp/geog
+      # - ../geog_high_res_mandatory:/root/rasp/geog
+      - ../geog_low_res_mandatory/WPS_GEOG_LOW_RES:/root/rasp/geog

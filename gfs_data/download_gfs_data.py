@@ -4,7 +4,6 @@ import common
 import datetime as dt
 import gfs
 import logging
-
 import log_help
 
 LG = logging.getLogger('main')

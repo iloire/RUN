@@ -11,6 +11,7 @@ diff = os.popen('diff drjack.f90 .drjack.f90').read().strip()
 if len(diff) > 0:
    os.system('f2py3 -c -m drjack drjack.f90 && cp drjack.f90 .drjack.f90')
 else: print('Already compiled')
+
 import drjack
 import wrf
 import sounding_plot as SP
